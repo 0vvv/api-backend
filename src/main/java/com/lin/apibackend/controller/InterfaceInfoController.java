@@ -14,16 +14,18 @@ import com.lin.apibackend.model.dto.interfaceinfo.InterfaceInfoQueryRequest;
 import com.lin.apibackend.model.dto.interfaceinfo.InterfaceInfoUpdateRequest;
 import com.lin.apibackend.model.entity.InterfaceInfo;
 import com.lin.apibackend.model.entity.User;
-import com.lin.apibackend.model.vo.InterfaceInfoVO;
 import com.lin.apibackend.service.InterfaceInfoService;
 import com.lin.apibackend.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import io.swagger.v3.oas.annotations.Operation;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 /**
  * 帖子接口
@@ -49,6 +51,7 @@ public class InterfaceInfoController {
      * @param request
      * @return
      */
+    @Operation(summary = "增加interface")
     @PostMapping("/add")
     public BaseResponse<Long> addInterfaceInfo(@RequestBody InterfaceInfoAddRequest interfaceInfoAddRequest, HttpServletRequest request) {
         if (interfaceInfoAddRequest == null) {
@@ -72,6 +75,7 @@ public class InterfaceInfoController {
      * @param request
      * @return
      */
+    @Operation(summary = "删除interface")
     @PostMapping("/delete")
     public BaseResponse<Boolean> deleteInterfaceInfo(@RequestBody DeleteRequest deleteRequest, HttpServletRequest request) {
         if (deleteRequest == null || deleteRequest.getId() <= 0) {
