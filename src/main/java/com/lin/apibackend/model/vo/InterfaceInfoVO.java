@@ -1,24 +1,20 @@
-package com.lin.apibackend.model.entity;
+package com.lin.apibackend.model.vo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 接口信息
- * @TableName interface_info
+ * 帖子视图
+ *
  */
-@TableName(value ="interface_info")
 @Data
-public class InterfaceInfo {
+public class InterfaceInfoVO implements Serializable {
     /**
      * 主键
      */
-    @TableId(type = IdType.AUTO)
     private Long id;
 
     /**

@@ -1,24 +1,21 @@
-package com.lin.apibackend.model.entity;
+package com.lin.apibackend.model.dto.interfaceinfo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.lin.apibackend.common.PageRequest;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-import java.util.Date;
+import java.io.Serializable;
 
 /**
- * 接口信息
- * @TableName interface_info
+ * 查询请求
+ *
  */
-@TableName(value ="interface_info")
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class InterfaceInfo {
+public class InterfaceInfoQueryRequest extends PageRequest implements Serializable {
     /**
      * 主键
      */
-    @TableId(type = IdType.AUTO)
     private Long id;
 
     /**
@@ -65,20 +62,4 @@ public class InterfaceInfo {
      * 创建人
      */
     private Long userId;
-
-    /**
-     * 创建时间
-     */
-    private Date createTime;
-
-    /**
-     * 更新时间
-     */
-    private Date updateTime;
-
-    /**
-     * 是否删除(0-未删, 1-已删)
-     */
-    @TableLogic
-    private Integer isDelete;
 }
