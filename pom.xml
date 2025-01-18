@@ -28,6 +28,7 @@
 	</scm>
 	<properties>
 		<java.version>23</java.version>
+		<knife4j.version>4.3.0</knife4j.version>
 	</properties>
 	<dependencies>
 		<dependency>

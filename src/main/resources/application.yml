@@ -21,8 +21,6 @@ spring:
 #    database: 0
 server:
   port: 7529
-  servlet:
-    context-path: /api
 #mybatis-plus:
 #  configuration:
 #    map-underscore-to-camel-case: false
@@ -46,3 +44,33 @@ server:
 #  registry:
 #    id: nacos-registry
 #    address: nacos://localhost:8848
+# spring doc
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+    syntax-highlight:
+      theme: 'json'
+  api-docs:
+    path: /v3/api-docs
+  # 分组
+  #  group-configs:
+  #    - group: 'dev'
+  #      paths-to-match: '/**'
+  #    - group: 'prod'
+  #      paths-to-match: '/prod'
+  #    - group: 'test'
+  #      paths-to-match: '/test'
+# Knife4j增强配置
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+    swagger-model-name: '对象模型'
+    enable-swagger-models: true
+    enable-dynamic-parameter: false
+    footer-custom-content: "<strong>Copyright ©️ 2025 XXX. All Rights Reversed</strong>"
+    enable-footer-custom: true
+    enable-footer: true
+    enable-document-manage: true

@@ -1,32 +1,19 @@
 package com.lin.apibackend.service.impl;
 
-import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lin.apibackend.common.ErrorCode;
-import com.lin.apibackend.constant.CommonConstant;
 import com.lin.apibackend.exception.BusinessException;
 import com.lin.apibackend.exception.ThrowUtils;
 import com.lin.apibackend.model.dto.interfaceinfo.InterfaceInfoQueryRequest;
 import com.lin.apibackend.model.entity.InterfaceInfo;
-import com.lin.apibackend.model.entity.User;
-import com.lin.apibackend.model.vo.InterfaceInfoVO;
-import com.lin.apibackend.model.vo.UserVO;
 import com.lin.apibackend.service.InterfaceInfoService;
 import com.lin.apibackend.mapper.InterfaceInfoMapper;
 import com.lin.apibackend.service.UserService;
-import com.lin.apibackend.utils.SqlUtils;
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
 * @author LIN
