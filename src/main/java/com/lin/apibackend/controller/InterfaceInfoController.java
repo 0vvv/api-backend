@@ -1,19 +1,18 @@
 package com.lin.apibackend.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.google.gson.Gson;
 import com.lin.apibackend.annotation.AuthCheck;
 import com.lin.apibackend.common.*;
 import com.lin.apibackend.enums.InterfaceInfoStatusEnum;
 import com.lin.apibackend.exception.BusinessException;
 import com.lin.apibackend.exception.ThrowUtils;
-import com.lin.apibackend.model.dto.interfaceinfo.InterfaceInfoAddRequest;
-import com.lin.apibackend.model.dto.interfaceinfo.InterfaceInfoEditRequest;
-import com.lin.apibackend.model.dto.interfaceinfo.InterfaceInfoQueryRequest;
-import com.lin.apibackend.model.dto.interfaceinfo.InterfaceInfoUpdateRequest;
+import com.lin.apibackend.model.dto.interfaceinfo.*;
 import com.lin.apibackend.model.entity.InterfaceInfo;
 import com.lin.apibackend.model.entity.User;
 import com.lin.apibackend.service.InterfaceInfoService;
 import com.lin.apibackend.service.UserService;
+import com.lin.apiclientsdk.ApiClientProperties;
 import com.lin.apiclientsdk.client.ApiClient;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -262,6 +261,7 @@ public class InterfaceInfoController {
         InterfaceInfo oldInterfaceInfo = interfaceInfoService.getById(id);
         ThrowUtils.throwIf(oldInterfaceInfo == null, ErrorCode.NOT_FOUND_ERROR);
         // 判断该接口是否可以调用
+        // todo 这里调用接口直接写死，调用getNameByGet接口，实际情况应该调用请求需要的接口
         String name = apiClient.getNameByGet("lin");
         if (StringUtils.isBlank(name)) {
             throw new BusinessException(ErrorCode.SYSTEM_ERROR, "接口调用失败");
@@ -291,5 +291,36 @@ public class InterfaceInfoController {
         interfaceInfo.setStatus(InterfaceInfoStatusEnum.OFFLINE.getValue());
         boolean result = interfaceInfoService.updateById(interfaceInfo);
         return ResultUtils.success(result);
+    }
+
+    // 调用接口给用户展示效果（测试调用）
+    @PostMapping("/invoke")
+    public BaseResponse<Object> offlineInterfaceInfo(@RequestBody InterfaceInfoInvokeRequest interfaceInfoInvokeRequest,
+                                                      HttpServletRequest request) {
+        if (interfaceInfoInvokeRequest == null || interfaceInfoInvokeRequest.getId() <= 0) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        long id = interfaceInfoInvokeRequest.getId();
+        String userRequestParams = interfaceInfoInvokeRequest.getUserRequestParams();
+        // 判断是否存在
+        InterfaceInfo oldInterfaceInfo = interfaceInfoService.getById(id);
+        ThrowUtils.throwIf(oldInterfaceInfo == null, ErrorCode.NOT_FOUND_ERROR);
+        if(oldInterfaceInfo.getStatus()==InterfaceInfoStatusEnum.OFFLINE.getValue()){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "接口已下线");
+        }
+        // 调用接口
+        User loginUser=userService.getLoginUser(request);
+        String accessKey=loginUser.getAccessKey();
+        String secretKey=loginUser.getSecretKey();
+        // 使用用户自己的ak和sk
+        ApiClientProperties apiClientProperties=new ApiClientProperties();
+        apiClientProperties.setAccessKey(accessKey);
+        apiClientProperties.setSecretKey(secretKey);
+        ApiClient tmpClient=new ApiClient(apiClientProperties);
+        // todo 这里调用接口直接写死，调用getUsernameByPost接口，实际情况应该调用请求需要的接口
+        Gson gson=new Gson();
+        com.lin.apiclientsdk.model.User user = gson.fromJson(userRequestParams, com.lin.apiclientsdk.model.User.class);
+        String username = tmpClient.getUserNameByPost(user);
+        return ResultUtils.success(username);
     }
 }

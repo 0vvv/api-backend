@@ -74,4 +74,7 @@ public class User {
      * 是否删除
      */
     private Integer isDelete;
+
+    private String accessKey;
+    private String secretKey;
 }
