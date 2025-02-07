@@ -1,10 +1,9 @@
 package com.lin.apibackend.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.lin.apibackend.common.BaseResponse;
-import com.lin.apibackend.common.DeleteRequest;
-import com.lin.apibackend.common.ErrorCode;
-import com.lin.apibackend.common.ResultUtils;
+import com.lin.apibackend.annotation.AuthCheck;
+import com.lin.apibackend.common.*;
+import com.lin.apibackend.enums.InterfaceInfoStatusEnum;
 import com.lin.apibackend.exception.BusinessException;
 import com.lin.apibackend.exception.ThrowUtils;
 import com.lin.apibackend.model.dto.interfaceinfo.InterfaceInfoAddRequest;
@@ -15,7 +14,9 @@ import com.lin.apibackend.model.entity.InterfaceInfo;
 import com.lin.apibackend.model.entity.User;
 import com.lin.apibackend.service.InterfaceInfoService;
 import com.lin.apibackend.service.UserService;
+import com.lin.apiclientsdk.client.ApiClient;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,6 +42,8 @@ public class InterfaceInfoController {
     @Resource
     private UserService userService;
 
+    @Resource
+    private ApiClient apiClient;
     // region 增删改查
 
     /**
@@ -246,4 +249,47 @@ public class InterfaceInfoController {
         return ResultUtils.success(result);
     }
 
+    // 管理员发布接口
+    @PostMapping("/online")
+    @AuthCheck(mustRole = "admin")
+    public BaseResponse<Boolean> onlineInterfaceInfo(@RequestBody IdRequest idRequest,
+                                                     HttpServletRequest request) {
+        if (idRequest == null || idRequest.getId() <= 0) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        // 判断是否存在
+        long id = idRequest.getId();
+        InterfaceInfo oldInterfaceInfo = interfaceInfoService.getById(id);
+        ThrowUtils.throwIf(oldInterfaceInfo == null, ErrorCode.NOT_FOUND_ERROR);
+        // 判断该接口是否可以调用
+        String name = apiClient.getNameByGet("lin");
+        if (StringUtils.isBlank(name)) {
+            throw new BusinessException(ErrorCode.SYSTEM_ERROR, "接口调用失败");
+        }
+        // 上线接口
+        InterfaceInfo interfaceInfo = new InterfaceInfo();
+        interfaceInfo.setId(id);
+        interfaceInfo.setStatus(InterfaceInfoStatusEnum.ONLINE.getValue());
+        boolean result = interfaceInfoService.updateById(interfaceInfo);
+        return ResultUtils.success(result);
+    }
+
+    // 管理员下线接口
+    @PostMapping("/offline")
+    @AuthCheck(mustRole = "admin")
+    public BaseResponse<Boolean> offlineInterfaceInfo(@RequestBody IdRequest idRequest,
+                                                      HttpServletRequest request) {
+        if (idRequest == null || idRequest.getId() <= 0) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        // 判断是否存在
+        long id = idRequest.getId();
+        InterfaceInfo oldInterfaceInfo = interfaceInfoService.getById(id);
+        ThrowUtils.throwIf(oldInterfaceInfo == null, ErrorCode.NOT_FOUND_ERROR);
+        InterfaceInfo interfaceInfo = new InterfaceInfo();
+        interfaceInfo.setId(id);
+        interfaceInfo.setStatus(InterfaceInfoStatusEnum.OFFLINE.getValue());
+        boolean result = interfaceInfoService.updateById(interfaceInfo);
+        return ResultUtils.success(result);
+    }
 }
