@@ -1,7 +1,6 @@
 package com.lin.apibackend.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.google.gson.Gson;
 import com.lin.apibackend.annotation.AuthCheck;
 import com.lin.apibackend.common.*;
 import com.lin.apibackend.enums.InterfaceInfoStatusEnum;
@@ -318,8 +317,10 @@ public class InterfaceInfoController {
         apiClientProperties.setSecretKey(secretKey);
         ApiClient tmpClient=new ApiClient(apiClientProperties);
         // todo 这里调用接口直接写死，调用getUsernameByPost接口，实际情况应该调用请求需要的接口
-        Gson gson=new Gson();
-        com.lin.apiclientsdk.model.User user = gson.fromJson(userRequestParams, com.lin.apiclientsdk.model.User.class);
+//        Gson gson=new Gson();
+//        com.lin.apiclientsdk.model.User user = gson.fromJson(userRequestParams, com.lin.apiclientsdk.model.User.class);
+        com.lin.apiclientsdk.model.User user = new com.lin.apiclientsdk.model.User();
+        user.setUsername("lin");
         String username = tmpClient.getUserNameByPost(user);
         return ResultUtils.success(username);
     }

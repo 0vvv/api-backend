@@ -17,11 +17,13 @@
             <result property="createTime" column="createTime" />
             <result property="updateTime" column="updateTime" />
             <result property="isDelete" column="isDelete" />
+            <result property="accessKey" column="accessKey" />
+            <result property="secretKey" column="secretKey" />
     </resultMap>
 
     <sql id="Base_Column_List">
         id,userAccount,userPassword,unionId,mpOpenId,userName,
         userAvatar,userProfile,userRole,createTime,updateTime,
-        isDelete
+        isDelete,accessKey,secretKey
     </sql>
 </mapper>
