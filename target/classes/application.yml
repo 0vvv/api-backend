@@ -28,15 +28,6 @@ server:
 #      logic-delete-field: isDelete # ????????????(since 3.3.0,????????????2)
 #      logic-delete-value: 1 # ??????(??? 1)
 #      logic-not-delete-value: 0 # ??????(??? 0)
-#dubbo:
-#  application:
-#    name: dubbo-springboot-demo-provider
-#  protocol:
-#    name: dubbo
-#    port: -1
-#  registry:
-#    id: nacos-registry
-#    address: nacos://localhost:8848
 springdoc:
   api-docs:
     enabled: true
@@ -50,3 +41,12 @@ api:
   client:
     access-key: lin
     secret-key: abcdefg
+dubbo:
+  application:
+    name: dubbo-springboot-demo-provider
+    logger: slf4j
+  protocol:
+    name: tri
+    port: 50052
+  registry:
+    address: nacos://${nacos.address:127.0.0.1}:8848

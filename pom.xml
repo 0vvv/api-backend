@@ -28,6 +28,7 @@
 	</scm>
 	<properties>
 		<java.version>23</java.version>
+		<dubbo.version>3.3.1</dubbo.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -37,6 +38,23 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.dubbo</groupId>
+			<artifactId>dubbo-spring-boot-starter</artifactId>
+			<version>${dubbo.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.dubbo</groupId>
+			<artifactId>dubbo-nacos-spring-boot-starter</artifactId>
+			<version>${dubbo.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.dubbo</groupId>
+			<artifactId>dubbo-bom</artifactId>
+			<version>${dubbo.version}</version>
+<!--			<type>pom</type>-->
+<!--			<scope>import</scope>-->
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
