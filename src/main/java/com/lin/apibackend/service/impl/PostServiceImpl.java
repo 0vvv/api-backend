@@ -11,7 +11,6 @@ import com.lin.apibackend.exception.ThrowUtils;
 import com.lin.apibackend.model.dto.post.PostQueryRequest;
 import com.lin.apibackend.model.entity.Post;
 import com.lin.apibackend.mapper.PostMapper;
-import com.lin.apibackend.model.entity.User;
 import com.lin.apibackend.model.vo.PostVO;
 import com.lin.apibackend.model.vo.UserVO;
 import com.lin.apibackend.service.PostService;

@@ -8,8 +8,8 @@ import com.lin.apibackend.constant.CommonConstant;
 import com.lin.apibackend.enums.UserRoleEnum;
 import com.lin.apibackend.exception.BusinessException;
 import com.lin.apibackend.model.dto.user.UserQueryRequest;
-import com.lin.apibackend.model.entity.User;
 import com.lin.apibackend.mapper.UserMapper;
+import com.lin.apibackend.model.entity.User;
 import com.lin.apibackend.model.vo.LoginUserVO;
 import com.lin.apibackend.model.vo.UserVO;
 import com.lin.apibackend.service.UserService;
@@ -19,7 +19,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
-import lombok.extern.slf4j.Slf4j;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;

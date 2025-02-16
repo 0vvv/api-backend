@@ -1,5 +1,6 @@
 package com.lin.apibackend.service;
 
+import com.lin.apicommon.service.UserInterfaceInfoService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -7,7 +8,8 @@ import javax.annotation.Resource;
 
 @SpringBootTest
 public class UserInterfaceInfoServiceTest {
-    @Resource UserInterfaceInfoService userInterfaceInfoService;
+    @Resource
+    UserInterfaceInfoService userInterfaceInfoService;
 
     @Test
     public void testInvokeCount() {

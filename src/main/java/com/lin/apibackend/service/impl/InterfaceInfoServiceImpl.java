@@ -6,7 +6,6 @@ import com.lin.apibackend.common.ErrorCode;
 import com.lin.apibackend.exception.BusinessException;
 import com.lin.apibackend.exception.ThrowUtils;
 import com.lin.apibackend.model.dto.interfaceinfo.InterfaceInfoQueryRequest;
-import com.lin.apibackend.model.entity.InterfaceInfo;
 import com.lin.apibackend.service.InterfaceInfoService;
 import com.lin.apibackend.mapper.InterfaceInfoMapper;
 import com.lin.apibackend.service.UserService;

@@ -2,7 +2,6 @@ package com.lin.apibackend.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.lin.apibackend.model.entity.User;
-import org.apache.ibatis.annotations.Mapper;
 
 /**
 * @author LIN

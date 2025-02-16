@@ -7,11 +7,12 @@ import com.lin.apibackend.exception.BusinessException;
 import com.lin.apibackend.exception.ThrowUtils;
 import com.lin.apibackend.model.dto.userinterfaceinfo.UserInterfaceInfoAddRequest;
 import com.lin.apibackend.model.dto.userinterfaceinfo.UserInterfaceInfoUpdateRequest;
-import com.lin.apibackend.model.entity.UserInterfaceInfo;
+
 import com.lin.apibackend.model.entity.User;
-import com.lin.apibackend.service.UserInterfaceInfoService;
 import com.lin.apibackend.service.UserService;
 import com.lin.apiclientsdk.client.ApiClient;
+import com.lin.apicommon.model.entity.UserInterfaceInfo;
+import com.lin.apicommon.service.UserInterfaceInfoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.PostMapping;

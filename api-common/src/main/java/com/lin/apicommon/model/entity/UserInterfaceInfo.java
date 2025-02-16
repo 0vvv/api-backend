@@ -1,4 +1,4 @@
-package com.lin.apibackend.model.entity;
+package com.lin.apicommon.model.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
@@ -61,4 +61,12 @@ public class UserInterfaceInfo {
 
     @TableField
     private static final long serialVersionUID = 1L;
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
 }

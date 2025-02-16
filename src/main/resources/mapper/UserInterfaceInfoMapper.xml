@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lin.apibackend.mapper.UserInterfaceInfoMapper">
 
-    <resultMap id="BaseResultMap" type="com.lin.apibackend.model.entity.UserInterfaceInfo">
+    <resultMap id="BaseResultMap" type="com.lin.apicommon.model.entity.UserInterfaceInfo">
             <id property="id" column="id" />
             <result property="userid" column="userId" />
             <result property="interfaceinfoid" column="interfaceInfoId" />

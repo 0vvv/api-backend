@@ -1,7 +1,7 @@
 package com.lin.apibackend.mapper;
 
-import com.lin.apibackend.model.entity.UserInterfaceInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.lin.apicommon.model.entity.UserInterfaceInfo;
 
 /**
 * @author LIN

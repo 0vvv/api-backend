@@ -51,12 +51,10 @@
 		</dependency>
 		<dependency>
 			<groupId>org.apache.dubbo</groupId>
-			<artifactId>dubbo-bom</artifactId>
+			<artifactId>dubbo</artifactId>
 			<version>${dubbo.version}</version>
-<!--			<type>pom</type>-->
-<!--			<scope>import</scope>-->
 		</dependency>
-		<dependency>
+        <dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>1.18.36</version>
@@ -116,6 +114,11 @@
 		<dependency>
 			<groupId>com.lin</groupId>
 			<artifactId>api-client-sdk</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.lin</groupId>
+			<artifactId>api-common</artifactId>
 			<version>0.0.1</version>
 		</dependency>
 	</dependencies>
